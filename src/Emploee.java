@@ -1,5 +1,4 @@
 import java.util.Objects;
-
 public class Emploee {
     private String firstName;
     private String middleName;

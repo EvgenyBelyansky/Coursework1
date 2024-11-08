@@ -25,6 +25,5 @@ public class Main {
         System.out.printf("\nСотрудник с минимальной ЗП: %s", emploees[Emploee.findEmploeeWithMinSalary(emploees) - 1]);
 
         System.out.printf("\nСотрудник с максимальной ЗП: %s", emploees[Emploee.findEmploeeWithMaxSalary(emploees) - 1]);
-
     }
 }
