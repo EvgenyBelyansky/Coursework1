@@ -83,51 +83,11 @@ public class Emploee {
 
     @Override
     public String toString() {
-        return String.format("Сотрудник: %s %s %s; Отдел: %s; Зарплата: %s; Id: %s.",
+        return String.format("%s %s %s; Отдел: %s; Зарплата: %s; Id: %s.",
                 lastName, firstName, middleName, departament, salary, id);
     }
 
-    public static void printAllEmploee(Emploee[] emploees) {
-        for (int i = 0; i < emploees.length; i++) {
-            System.out.println(emploees[i]);
-        }
-    }
-
-    public static double calculateSumSalariesPerMonth(Emploee[] emploees) {
-        double sum = 0;
-        for (int i = 0; i < emploees.length; ) {
-            sum += emploees[i].salary;
-            i++;
-        }
-        return sum;
-    }
-
-    public static double calculateAverageSalary(Emploee[] emploees) {
-        double averageSalary = calculateSumSalariesPerMonth(emploees) / count;
-        return averageSalary;
-    }
-
-    public static int findEmploeeWithMinSalary(Emploee[] emploees) {
-        double minSalary = emploees[0].salary;
-        int idEmploeeWithMinSalary = 0;
-        for (int i = 0; i < emploees.length; i++) {
-            if (minSalary > emploees[i].salary) {
-                minSalary = emploees[i].salary;
-                idEmploeeWithMinSalary = emploees[i].id;
-            }
-        }
-        return idEmploeeWithMinSalary;
-    }
-
-    public static int findEmploeeWithMaxSalary(Emploee[] emploees) {
-        double maxSalary = emploees[0].salary;
-        int idEmploeeWithMaxSalary = 0;
-        for (int i = 0; i < emploees.length; i++) {
-            if (maxSalary < emploees[i].salary) {
-                maxSalary = emploees[i].salary;
-                idEmploeeWithMaxSalary = emploees[i].id;
-            }
-        }
-        return idEmploeeWithMaxSalary;
+    public String getEmploeeFullName() {
+        return String.format("%s %s %s", lastName, firstName, middleName);
     }
 }
