@@ -48,17 +48,21 @@ public class Emploee {
     }
 
     public void setDepartament(int departament) {
-        if (departament < 1 && departament > 5) {
+        if (departament >= 1 && departament <= 5) {
             this.departament = departament;
+        } else {
+            throw new IllegalArgumentException("Такого департамента не существует");
         }
-        throw new IllegalArgumentException("Такого департамента не существует");
+
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(double salary) {
         if (salary > 0) {
             this.salary = salary;
+        } else if (salary < 0) {
+            throw new IllegalArgumentException("Зарплата не может быть меньше или равна нулю");
         }
-        throw new IllegalArgumentException("Зарплата не может быть меньше или равна нулю");
+
     }
 
     @Override

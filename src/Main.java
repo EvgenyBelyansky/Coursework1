@@ -28,6 +28,8 @@ public class Main {
 
         printFullNameEmploee();
         printAllEmploee();
+        indexSalary(10);
+        printAllEmploee();
 
     }
     public static void printAllEmploee() {
@@ -53,7 +55,7 @@ public class Main {
     }
 
     public static double calculateAverageSalary() {
-        return calculateSumSalariesPerMonth() / (double) emploesSize();
+        return calculateSumSalariesPerMonth() / (double) emploeesSize();
     }
 
     public static Emploee findEmploeeWithMinSalary() {
@@ -76,7 +78,7 @@ public class Main {
         return maxSalaryEmploee;
     }
 
-    public static int emploesSize() {
+    public static int emploeesSize() {
         int amount = 0;
         for (int i = 0; i < emploees.length; i++) {
             if (emploees[i] != null) {
@@ -84,5 +86,12 @@ public class Main {
             }
         }
         return amount;
+    }
+
+    public static void indexSalary(double percent) {
+        percent /= 100;
+        for (int i = 0; i < emploeesSize(); i++) {
+            emploees[i].setSalary((emploees[i].getSalary() * percent) + emploees[i].getSalary());
+        }
     }
 }
