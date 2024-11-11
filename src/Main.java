@@ -1,21 +1,30 @@
 public class Main {
-    private static Emploee [] emploees = new Emploee[10];
+    private static Emploee[] emploees = new Emploee[10];
 
     public static void main(String[] args) {
 
         EmploeeBook emploeeBook = new EmploeeBook();
 
-        emploees[0] = new Emploee("Глухова", "Ксения", "Валерьевна", 1, 55000);
-        emploees[1] = new Emploee("Кохановский", "Дмитрий", "Алексеевич", 2, 15000);
-        emploees[2] = new Emploee("Мухин", "Илья", "Сергеевич", 4, 10000);
-        emploees[3] = new Emploee("Петров", "Константин", "Викторович", 3, 15000);
-        emploees[4] = new Emploee("Иванов", "Иван", "Иванович", 5, 15000);
-        emploees[5] = new Emploee("Сидоров", "Петр", "Константинович", 2, 11000);
-        emploees[6] = new Emploee("Краюшина", "Елена", "Александровна", 3, 12000);
-        emploees[7] = new Emploee("Горбунов", "Илья", "Витальевич", 1, 65000);
-        emploees[8] = new Emploee("Арапов", "Владимир", "Николаевич", 5, 12000);
-        emploees[9] = new Emploee("Федорова", "Ольга", "Евгеньевна", 2, 15000);
-
+        emploees[0] = new Emploee
+                ("Глухова", "Ксения", "Валерьевна", 1, 15000);
+        emploees[1] = new Emploee
+                ("Кохановский", "Дмитрий", "Алексеевич", 1, 16000);
+        emploees[2] = new Emploee
+                ("Мухин", "Илья", "Сергеевич", 2, 10000);
+        emploees[3] = new Emploee
+                ("Петров", "Константин", "Викторович", 2, 15000);
+        emploees[4] = new Emploee
+                ("Иванов", "Иван", "Иванович", 3, 15000);
+        emploees[5] = new Emploee
+                ("Сидоров", "Петр", "Константинович", 3, 11000);
+        emploees[6] = new Emploee
+                ("Краюшина", "Елена", "Александровна", 4, 12000);
+        emploees[7] = new Emploee
+                ("Горбунов", "Илья", "Витальевич", 4, 65000);
+        emploees[8] = new Emploee
+                ("Арапов", "Владимир", "Николаевич", 5, 12000);
+        emploees[9] = new Emploee
+                ("Федорова", "Ольга", "Евгеньевна", 5, 15000);
 
 
         System.out.printf("\nСумма затрат на ЗП в месяц: %s", calculateSumSalariesPerMonth());
@@ -31,24 +40,33 @@ public class Main {
         indexSalary(10);
         printAllEmploee();
 
+        int selectedDepartment = 3;
+        System.out.printf("\nСотрудник с максимальной ЗП в %s-м отделе: %s",
+                selectedDepartment, findEmploeeWithMaxSalaryInDepartment(selectedDepartment));
+        System.out.printf("\nСотрудник с минимальной ЗП в %s-м отделе: %s",
+                selectedDepartment, findEmploeeWithMinSalaryInDepartment(selectedDepartment));
+
+        System.out.printf("\nСумма затрат на ЗП в %s-м отделе: %s",
+                selectedDepartment, calculateSumSalariesPerMonthOfDepartment(selectedDepartment));
     }
+
     public static void printAllEmploee() {
         System.out.println("\n\nСписок всех данных сотрудников:");
-        for (int i = 0; i < emploees.length; i++) {
-            System.out.printf("%s. %s\n", i+1, emploees[i]);
+        for (int i = 0; i < emploeesSize(); i++) {
+            System.out.printf("%s. %s\n", i + 1, emploees[i]);
         }
     }
 
     public static void printFullNameEmploee() {
         System.out.println("\n\nСписок сотрудников:");
-        for (int i = 0; i < emploees.length; i++) {
-            System.out.printf("%s. %s\n", i+1, emploees[i].getEmploeeFullName());
+        for (int i = 0; i < emploeesSize(); i++) {
+            System.out.printf("%s. %s\n", i + 1, emploees[i].getEmploeeFullName());
         }
     }
 
     public static double calculateSumSalariesPerMonth() {
         double sum = 0;
-        for (int i = 0; i < emploees.length; i++) {
+        for (int i = 0; i < emploeesSize(); i++) {
             sum += emploees[i].getSalary();
         }
         return sum;
@@ -60,8 +78,8 @@ public class Main {
 
     public static Emploee findEmploeeWithMinSalary() {
         Emploee minSalaryEmploee = emploees[0];
-        for (int i = 0; i < emploees.length; i++) {
-            if (minSalaryEmploee.getSalary() > emploees[i].getSalary()) {
+        for (int i = 0; i < emploeesSize(); i++) {
+            if (minSalaryEmploee.getSalary() >= emploees[i].getSalary()) {
                 minSalaryEmploee = emploees[i];
             }
         }
@@ -70,8 +88,8 @@ public class Main {
 
     public static Emploee findEmploeeWithMaxSalary() {
         Emploee maxSalaryEmploee = emploees[0];
-        for (int i = 0; i < emploees.length; i++) {
-            if (maxSalaryEmploee.getSalary() < emploees[i].getSalary()) {
+        for (int i = 0; i < emploeesSize(); i++) {
+            if (maxSalaryEmploee.getSalary() <= emploees[i].getSalary()) {
                 maxSalaryEmploee = emploees[i];
             }
         }
@@ -93,5 +111,44 @@ public class Main {
         for (int i = 0; i < emploeesSize(); i++) {
             emploees[i].setSalary((emploees[i].getSalary() * percent) + emploees[i].getSalary());
         }
+    }
+
+    public static Emploee findEmploeeWithMaxSalaryInDepartment(int departmentNumber) {
+        Emploee maxSalaryEmploee = emploees[0];
+
+        for (int i = 0; i < emploeesSize(); i++) {
+            if (departmentNumber == emploees[i].getDepartment() &&
+                    maxSalaryEmploee.getSalary() <= emploees[i].getSalary()) {
+                maxSalaryEmploee = emploees[i];
+            } else if (departmentNumber < 1 || departmentNumber > 5) {
+                throw new IllegalArgumentException("Такого департамента не существует");
+            }
+        }
+        return maxSalaryEmploee;
+    }
+
+    public static Emploee findEmploeeWithMinSalaryInDepartment(int departmentNumber) {
+        Emploee minSalaryEmploee = emploees[0];
+
+        for (int i = 0; i < emploeesSize(); i++) {
+            if (departmentNumber == emploees[i].getDepartment() &&
+                    minSalaryEmploee.getSalary() >= emploees[i].getSalary()) {
+                minSalaryEmploee = emploees[i];
+            } else if (departmentNumber < 1 || departmentNumber > 5) {
+                throw new IllegalArgumentException("Такого департамента не существует");
+            }
+        }
+        return minSalaryEmploee;
+    }
+
+    public static double calculateSumSalariesPerMonthOfDepartment(int departmentNumber) {
+        double sumSalaryOfDepartment = 0;
+        for (int i = 0; i < emploeesSize(); i++) {
+            if (departmentNumber == emploees[i].getDepartment()) {
+                sumSalaryOfDepartment += emploees[i].getSalary();
+            } else if (departmentNumber < 1 || departmentNumber > 5) {
+                throw new IllegalArgumentException("Такого департамента не существует");
+            }
+        }return sumSalaryOfDepartment;
     }
 }

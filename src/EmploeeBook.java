@@ -1,3 +1,3 @@
 public class EmploeeBook {
-    private Emploee [] emploees = new Emploee[10];
+    private Emploee [][] emploeeBook = new Emploee[5][5];
 }

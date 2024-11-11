@@ -4,16 +4,16 @@ public class Emploee {
     private String firstName;
     private String middleName;
     private String lastName;
-    private int departament;
+    private int department;
     private double salary;
     private int id;
     public static int count = 1;
 
-    public Emploee(String lastName, String firstName, String middleName, int departament, double salary) {
+    public Emploee(String lastName, String firstName, String middleName, int department, double salary) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.middleName = middleName;
-        this.departament = departament;
+        this.department = department;
         this.salary = salary;
         this.id = count;
         count++;
@@ -31,8 +31,8 @@ public class Emploee {
         return lastName;
     }
 
-    public int getDepartament() {
-        return departament;
+    public int getDepartment() {
+        return department;
     }
 
     public double getSalary() {
@@ -47,13 +47,12 @@ public class Emploee {
         return id;
     }
 
-    public void setDepartament(int departament) {
-        if (departament >= 1 && departament <= 5) {
-            this.departament = departament;
+    public void setDepartment(int department) {
+        if (department >= 1 && department <= 5) {
+            this.department = department;
         } else {
             throw new IllegalArgumentException("Такого департамента не существует");
         }
-
     }
 
     public void setSalary(double salary) {
@@ -74,7 +73,7 @@ public class Emploee {
             return false;
         }
         Emploee emploee = (Emploee) o;
-        return departament == emploee.departament && salary == emploee.salary && id == emploee.id &&
+        return department == emploee.department && salary == emploee.salary && id == emploee.id &&
                 Objects.equals(firstName, emploee.firstName) &&
                 Objects.equals(middleName, emploee.middleName) &&
                 Objects.equals(lastName, emploee.lastName);
@@ -82,13 +81,13 @@ public class Emploee {
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, middleName, lastName, departament, salary, id);
+        return Objects.hash(firstName, middleName, lastName, department, salary, id);
     }
 
     @Override
     public String toString() {
         return String.format("%s %s %s; Отдел: %s; Зарплата: %s; Id: %s.",
-                lastName, firstName, middleName, departament, salary, id);
+                lastName, firstName, middleName, department, salary, id);
     }
 
     public String getEmploeeFullName() {
