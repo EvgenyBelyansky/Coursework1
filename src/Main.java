@@ -18,7 +18,7 @@ public class Main {
         emploees[5] = new Emploee
                 ("Сидоров", "Петр", "Константинович", 3, 11000);
         emploees[6] = new Emploee
-                ("Краюшина", "Елена", "Александровна", 4, 12000);
+                ("Краюшина", "Елена", "Александровна", 3, 12000);
         emploees[7] = new Emploee
                 ("Горбунов", "Илья", "Витальевич", 4, 65000);
         emploees[8] = new Emploee
@@ -40,7 +40,8 @@ public class Main {
         indexSalary(10);
         printAllEmploee();
 
-        int selectedDepartment = 3;
+        int selectedDepartment = 5;
+
         System.out.printf("\nСотрудник с максимальной ЗП в %s-м отделе: %s",
                 selectedDepartment, findEmploeeWithMaxSalaryInDepartment(selectedDepartment));
         System.out.printf("\nСотрудник с минимальной ЗП в %s-м отделе: %s",
@@ -48,6 +49,26 @@ public class Main {
 
         System.out.printf("\nСумма затрат на ЗП в %s-м отделе: %s",
                 selectedDepartment, calculateSumSalariesPerMonthOfDepartment(selectedDepartment));
+
+        System.out.printf("\nВ %s-м отделе работающих сотрудников: %s",
+                selectedDepartment, countDepartment(selectedDepartment));
+        System.out.printf("\nСредняя зарплата в %s-м отделе: %.2f",
+                selectedDepartment, calculateAverageSalaryOfDepartment(selectedDepartment));
+
+        indexSalaryEmploeeOfDepartment(20, selectedDepartment);
+
+        printAllEmploeesOfDepartment(selectedDepartment);
+
+        findAndPrintEmploeesWithSalaryLessThan(25000);
+
+        findAndPrintEmploeesWithSalaryMoreThan(50000);
+
+    }
+
+    public static void checkDepartmentNumber(int departmentNumber) {
+        if (departmentNumber < 1 || departmentNumber > 5) {
+            throw new IllegalArgumentException("Такого департамента не существует");
+        }
     }
 
     public static void printAllEmploee() {
@@ -79,7 +100,7 @@ public class Main {
     public static Emploee findEmploeeWithMinSalary() {
         Emploee minSalaryEmploee = emploees[0];
         for (int i = 0; i < emploeesSize(); i++) {
-            if (minSalaryEmploee.getSalary() >= emploees[i].getSalary()) {
+            if (minSalaryEmploee.getSalary() > emploees[i].getSalary()) {
                 minSalaryEmploee = emploees[i];
             }
         }
@@ -89,7 +110,7 @@ public class Main {
     public static Emploee findEmploeeWithMaxSalary() {
         Emploee maxSalaryEmploee = emploees[0];
         for (int i = 0; i < emploeesSize(); i++) {
-            if (maxSalaryEmploee.getSalary() <= emploees[i].getSalary()) {
+            if (maxSalaryEmploee.getSalary() < emploees[i].getSalary()) {
                 maxSalaryEmploee = emploees[i];
             }
         }
@@ -114,41 +135,94 @@ public class Main {
     }
 
     public static Emploee findEmploeeWithMaxSalaryInDepartment(int departmentNumber) {
+        checkDepartmentNumber(departmentNumber);
         Emploee maxSalaryEmploee = emploees[0];
 
         for (int i = 0; i < emploeesSize(); i++) {
             if (departmentNumber == emploees[i].getDepartment() &&
                     maxSalaryEmploee.getSalary() <= emploees[i].getSalary()) {
                 maxSalaryEmploee = emploees[i];
-            } else if (departmentNumber < 1 || departmentNumber > 5) {
-                throw new IllegalArgumentException("Такого департамента не существует");
             }
         }
         return maxSalaryEmploee;
     }
 
     public static Emploee findEmploeeWithMinSalaryInDepartment(int departmentNumber) {
+        checkDepartmentNumber(departmentNumber);
         Emploee minSalaryEmploee = emploees[0];
 
         for (int i = 0; i < emploeesSize(); i++) {
             if (departmentNumber == emploees[i].getDepartment() &&
                     minSalaryEmploee.getSalary() >= emploees[i].getSalary()) {
                 minSalaryEmploee = emploees[i];
-            } else if (departmentNumber < 1 || departmentNumber > 5) {
-                throw new IllegalArgumentException("Такого департамента не существует");
             }
         }
         return minSalaryEmploee;
     }
 
     public static double calculateSumSalariesPerMonthOfDepartment(int departmentNumber) {
+        checkDepartmentNumber(departmentNumber);
         double sumSalaryOfDepartment = 0;
         for (int i = 0; i < emploeesSize(); i++) {
             if (departmentNumber == emploees[i].getDepartment()) {
                 sumSalaryOfDepartment += emploees[i].getSalary();
-            } else if (departmentNumber < 1 || departmentNumber > 5) {
-                throw new IllegalArgumentException("Такого департамента не существует");
             }
-        }return sumSalaryOfDepartment;
+        }
+        return sumSalaryOfDepartment;
+    }
+
+    public static int countDepartment(int departmentNumber) {
+        checkDepartmentNumber(departmentNumber);
+        int quantityEmploeeINDepartment = 0;
+        for (int i = 0; i < emploeesSize(); i++) {
+            if (departmentNumber == emploees[i].getDepartment()) {
+                quantityEmploeeINDepartment++;
+            }
+        }
+        return quantityEmploeeINDepartment;
+    }
+
+    public static double calculateAverageSalaryOfDepartment(int departmentNumber) {
+        checkDepartmentNumber(departmentNumber);
+        return calculateSumSalariesPerMonthOfDepartment(departmentNumber) / countDepartment(departmentNumber);
+    }
+
+    public static void indexSalaryEmploeeOfDepartment(double percent, int departmentNumber) {
+        checkDepartmentNumber(departmentNumber);
+        percent /= 100;
+
+        for (int i = 0; i < emploeesSize(); i++) {
+            if (departmentNumber == emploees[i].getDepartment()) {
+                emploees[i].setSalary((emploees[i].getSalary() * percent) + emploees[i].getSalary());
+            }
+        }
+    }
+
+    public static void printAllEmploeesOfDepartment(int departmentNumber) {
+        checkDepartmentNumber(departmentNumber);
+        System.out.printf("\n\nСписок всех сотрудников в %s-м отделе:", departmentNumber);
+        for (int i = 0; i < emploeesSize(); i++) {
+            if (departmentNumber == emploees[i].getDepartment()) {
+                System.out.printf("\n%s", emploees[i].getEmploeeWithoutDepartment());
+            }
+        }
+    }
+
+    public static void findAndPrintEmploeesWithSalaryLessThan(double baseSalary) {
+        System.out.printf("\n\nСписок сотрудников с ЗП меньше чем %s", baseSalary);
+        for (int i = 0; i < emploeesSize(); i++) {
+            if (emploees[i].getSalary() < baseSalary) {
+                System.out.printf("\n%s", emploees[i].getEmploeeWithoutDepartment());
+            }
+        }
+    }
+
+    public static void findAndPrintEmploeesWithSalaryMoreThan(double baseSalary) {
+        System.out.printf("\n\nСписок сотрудников с ЗП больше или равной %s", baseSalary);
+        for (int i = 0; i < emploeesSize(); i++) {
+            if (emploees[i].getSalary() >= baseSalary) {
+                System.out.printf("\n%s", emploees[i].getEmploeeWithoutDepartment());
+            }
+        }
     }
 }

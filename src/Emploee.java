@@ -91,6 +91,12 @@ public class Emploee {
     }
 
     public String getEmploeeFullName() {
-        return String.format("%s %s %s", lastName, firstName, middleName);
+        return String.format("%s %s %s",
+                lastName, firstName, middleName);
+    }
+
+    public String getEmploeeWithoutDepartment() {
+        return String.format("ФИО: %s %s %s; ЗП: %s; id %s.",
+                lastName, firstName, middleName, salary, id);
     }
 }
