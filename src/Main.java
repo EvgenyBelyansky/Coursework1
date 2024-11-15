@@ -5,26 +5,76 @@ public class Main {
 
         EmploeeBook emploeeBook = new EmploeeBook();
 
-        emploees[0] = new Emploee
-                ("Глухова", "Ксения", "Валерьевна", 1, 15000);
-        emploees[1] = new Emploee
-                ("Кохановский", "Дмитрий", "Алексеевич", 1, 16000);
-        emploees[2] = new Emploee
-                ("Мухин", "Илья", "Сергеевич", 2, 10000);
-        emploees[3] = new Emploee
-                ("Петров", "Константин", "Викторович", 2, 15000);
-        emploees[4] = new Emploee
-                ("Иванов", "Иван", "Иванович", 3, 15000);
-        emploees[5] = new Emploee
-                ("Сидоров", "Петр", "Константинович", 3, 11000);
-        emploees[6] = new Emploee
-                ("Краюшина", "Елена", "Александровна", 3, 12000);
-        emploees[7] = new Emploee
-                ("Горбунов", "Илья", "Витальевич", 4, 65000);
-        emploees[8] = new Emploee
-                ("Арапов", "Владимир", "Николаевич", 5, 12000);
-        emploees[9] = new Emploee
-                ("Федорова", "Ольга", "Евгеньевна", 5, 15000);
+        emploees[0] = new Emploee(
+                "Глухова",
+                "Ксения",
+                "Валерьевна",
+                1,
+                310
+        );
+        emploees[1] = new Emploee(
+                "Кохановский",
+                "Дмитрий",
+                "Алексеевич",
+                1,
+                300
+        );
+        emploees[2] = new Emploee(
+                "Мухин",
+                "Илья",
+                "Сергеевич",
+                2,
+                200
+        );
+        emploees[3] = new Emploee(
+                "Петров",
+                "Константин",
+                "Викторович",
+                2,
+                100
+        );
+        emploees[4] = new Emploee(
+                "Иванов",
+                "Иван",
+                "Иванович",
+                3,
+                200
+        );
+        emploees[5] = new Emploee(
+                "Сидоров",
+                "Петр",
+                "Константинович",
+                3,
+                150
+        );
+        emploees[6] = new Emploee(
+                "Краюшина",
+                "Елена",
+                "Александровна",
+                3,
+                100
+        );
+        emploees[7] = new Emploee(
+                "Горбунов",
+                "Илья",
+                "Витальевич",
+                4,
+                260
+        );
+        emploees[8] = new Emploee(
+                "Арапов",
+                "Владимир",
+                "Николаевич",
+                5,
+                120
+        );
+        emploees[9] = new Emploee(
+                "Федорова",
+                "Ольга",
+                "Евгеньевна",
+                5,
+                150
+        );
 
 
         System.out.printf("\nСумма затрат на ЗП в месяц: %s", calculateSumSalariesPerMonth());
@@ -136,11 +186,16 @@ public class Main {
 
     public static Emploee findEmploeeWithMaxSalaryInDepartment(int departmentNumber) {
         checkDepartmentNumber(departmentNumber);
-        Emploee maxSalaryEmploee = emploees[0];
+        Emploee maxSalaryEmploee = null;
+        boolean isFirstEmploeeInDepartment;
+        boolean isMaxSalaryEmploeeINDepartment;
 
         for (int i = 0; i < emploeesSize(); i++) {
-            if (departmentNumber == emploees[i].getDepartment() &&
-                    maxSalaryEmploee.getSalary() <= emploees[i].getSalary()) {
+            isFirstEmploeeInDepartment = departmentNumber == emploees[i].getDepartment() && maxSalaryEmploee == null;
+            isMaxSalaryEmploeeINDepartment = maxSalaryEmploee != null &&
+                    departmentNumber == emploees[i].getDepartment() &&
+                    maxSalaryEmploee.getSalary() < emploees[i].getSalary();
+            if (isFirstEmploeeInDepartment || isMaxSalaryEmploeeINDepartment) {
                 maxSalaryEmploee = emploees[i];
             }
         }
@@ -149,11 +204,16 @@ public class Main {
 
     public static Emploee findEmploeeWithMinSalaryInDepartment(int departmentNumber) {
         checkDepartmentNumber(departmentNumber);
-        Emploee minSalaryEmploee = emploees[0];
+        Emploee minSalaryEmploee = null;
+        boolean isFirstEmploeeInDepartment;
+        boolean isMaxSalaryEmploeeINDepartment;
 
         for (int i = 0; i < emploeesSize(); i++) {
-            if (departmentNumber == emploees[i].getDepartment() &&
-                    minSalaryEmploee.getSalary() >= emploees[i].getSalary()) {
+            isFirstEmploeeInDepartment = departmentNumber == emploees[i].getDepartment() && minSalaryEmploee == null;
+            isMaxSalaryEmploeeINDepartment = minSalaryEmploee != null &&
+                    departmentNumber == emploees[i].getDepartment() &&
+                    minSalaryEmploee.getSalary() > emploees[i].getSalary();
+            if (isFirstEmploeeInDepartment || isMaxSalaryEmploeeINDepartment) {
                 minSalaryEmploee = emploees[i];
             }
         }
