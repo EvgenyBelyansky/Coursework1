@@ -12,29 +12,39 @@ public class EmploeeBook {
         return amount;
     }
 
+
     public void addDepartment(Department department) {
         if (departmentSize() >= departments.length) {
-            throw new DepartmentIsFullException();
+            throw new OrganizationIsFullException();
         }
         departments[departmentSize()] = department;
     }
 
+
     public void printAllEmploee() {
         System.out.println("\n\nСписок всех данных сотрудников:");
         for (int i = 0; i < departmentSize(); i++) {
-            System.out.println("%s. %s\n");
             departments[i].printAllEmploeesOfDepartment();
         }
     }
 
-    public void printFullNameEmploee() {
-        System.out.println("\n\nСписок сотрудников:");
+    public void addEmploee(Emploee emploee, int departmentNumber) {
         for (int i = 0; i < departmentSize(); i++) {
-            System.out.printf("%s. %s\n", i + 1, departments[i].g);
+            if (departmentNumber == departments[i].getDepartmentNumber()) {
+                departments[i].addEmploee(emploee);
+                break;
+            }
         }
     }
 
-    public double calculateSumSalariesPerMonth() {
+    public void printFullNameEmploeeInCompany() {
+        System.out.println("\n\nСписок сотрудников компании:");
+        for (int i = 0; i < departmentSize(); i++) {
+            departments[i].printAllFullNamesEmploeesOfDepartment();
+        }
+    }
+
+    public double calculateSumSalariesPerMonthInCompany() {
         double sum = 0;
         for (int i = 0; i < departmentSize(); i++) {
             sum += departments[i].calculateSumSalariesPerMonthOfDepartment();
@@ -42,35 +52,67 @@ public class EmploeeBook {
         return sum;
     }
 
-    public double calculateAverageSalary() {
-        return calculateSumSalariesPerMonth() / (double) emploeesSize();
+    public int calculateQuantityEmploeeINCompany() {
+        int quantityEmploeeINCompany = 0;
+        for (int i = 0; i < departmentSize(); i++) {
+            quantityEmploeeINCompany += departments[i].countDepartment();
+        }
+        return quantityEmploeeINCompany;
     }
 
-    public Emploee findEmploeeWithMinSalary() {
-        Emploee minSalaryEmploee = emploees[0];
-        for (int i = 0; i < emploeesSize(); i++) {
-            if (minSalaryEmploee.getSalary() > emploees[i].getSalary()) {
-                minSalaryEmploee = emploees[i];
+    public double calculateAverageSalaryInCompany() {
+        return calculateSumSalariesPerMonthInCompany() / calculateQuantityEmploeeINCompany();
+    }
+
+
+    public double findMinSalaryInCompany() {
+        double minSalaryInCompany = departments[0].findEmploeeWithMinSalaryInDepartment().getSalary();
+        for (int i = 0; i < departmentSize(); i++) {
+            if (minSalaryInCompany > departments[i].findEmploeeWithMinSalaryInDepartment().getSalary()) {
+                minSalaryInCompany = departments[i].findEmploeeWithMinSalaryInDepartment().getSalary();
             }
         }
-        return minSalaryEmploee;
+        return minSalaryInCompany;
     }
 
-    public Emploee findEmploeeWithMaxSalary() {
-        Emploee maxSalaryEmploee = emploees[0];
-        for (int i = 0; i < 5; i++) {
-            if (maxSalaryEmploee.getSalary() < emploees[i].getSalary()) {
-                maxSalaryEmploee = emploees[i];
+    public int countMinSalaryInCompany() {
+        int count = 0;
+        for (int i = 0; i < departmentSize(); i++) {
+            if (departments[i].findEmploeeWithMinSalaryInDepartment().getSalary() == findMinSalaryInCompany()) {
+                count++;
             }
         }
-        return maxSalaryEmploee;
+        return count;
     }
 
-
-    public void indexSalary(double percent) {
-        percent /= 100;
-        for (int i = 0; i < emploeesSize(); i++) {
-            emploees[i].setSalary((emploees[i].getSalary() * percent) + emploees[i].getSalary());
+    public Emploee[] findAllEmploeeWithMinSalaryInCompany() {
+        Emploee[] minSalaryEmploeesInCompany = new Emploee[countMinSalaryInCompany()];
+        int j = 0;
+        for (int i = 0; i < departmentSize(); i++) {
+            if (departments[i].findEmploeeWithMinSalaryInDepartment().getSalary() == findMinSalaryInCompany()) {
+                minSalaryEmploeesInCompany[j] = departments[i].findEmploeeWithMinSalaryInDepartment();
+                j++;
+            }
         }
+        return minSalaryEmploeesInCompany;
+    }
+
+//    Имеет ли смысл делать такой же набор методов для максимальной ЗП или нужно сделать по другому?
+
+    public void indexSalaryAllEmploees(final double percent) {
+        for (int i = 0; i < departmentSize(); i++) {
+            departments[i].indexSalaryEmploeeOfDepartment(percent);
+        }
+    }
+
+    public Emploee findEmploeeInCompanyById(final int idEmploee) {
+        Emploee emploeebyId = departments[0].findEmploeeInDepartmentByID(idEmploee);
+        for (int i = 0; i < departmentSize(); i++) {
+            if (idEmploee == departments[i].findEmploeeInDepartmentByID(idEmploee).getId()) {
+                emploeebyId = departments[i].findEmploeeInDepartmentByID(idEmploee);
+            }
+
+        }
+        return emploeebyId;
     }
 }

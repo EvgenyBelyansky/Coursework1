@@ -99,4 +99,5 @@ public class Emploee {
         return String.format("ФИО: %s %s %s; ЗП: %s; id %s.",
                 lastName, firstName, middleName, salary, id);
     }
+
 }

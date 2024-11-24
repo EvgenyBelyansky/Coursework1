@@ -1,6 +1,5 @@
-import java.util.Objects;
-
 public class Department {
+
 
     private final Emploee[] emploees;
     private final int departmentNumber;
@@ -11,11 +10,23 @@ public class Department {
 
     }
 
+
     public void addEmploee(Emploee emploee) {
         if (emploeesSize() >= emploees.length) {
-            throw new DepartmentIsFullException();
+            throw new DepartmentISFullException();
         }
         emploees[emploeesSize()] = emploee;
+    }
+
+    public void removeEmployee(int id) {
+        for (int i = 0; i < emploeesSize(); i++) {
+            if (emploees[i].getId() == id) {
+                System.out.printf("Сотрудник с ID: %s %s удален", emploees[i].getId(), emploees[i].getEmploeeFullName());
+                System.arraycopy(emploees, i + 1, emploees, i, emploeesSize() - i - 1);
+                emploees[emploeesSize() - 1] = null;
+                return;
+            }
+        }
     }
 
     public int getDepartmentNumber() {
@@ -71,7 +82,7 @@ public class Department {
     }
 
     public double calculateAverageSalaryOfDepartment() {
-        return calculateSumSalariesPerMonthOfDepartment() / countDepartment();
+        return calculateSumSalariesPerMonthOfDepartment() / emploeesSize();
     }
 
     public void indexSalaryEmploeeOfDepartment(final double percent) {
@@ -81,13 +92,21 @@ public class Department {
     }
 
     public void printAllEmploeesOfDepartment() {
-        System.out.printf("\n\nСписок всех сотрудников в %s-м отделе:", departmentNumber);
+        System.out.printf("\nСписок всех сотрудников в %s-м отделе:", departmentNumber);
         for (int i = 0; i < emploeesSize(); i++) {
             System.out.printf("\n%s", emploees[i].getEmploeeWithoutDepartment());
         }
+
     }
 
-    public void findAndPrintEmploeesWithSalaryLessThan(double baseSalary) {
+    public void printAllFullNamesEmploeesOfDepartment() {
+        System.out.printf("Список сотрудников %s отдела:%n", this.getDepartmentNumber());
+        for (int i = 0; i < emploeesSize(); i++) {
+            System.out.println(emploees[i].getEmploeeFullName());
+        }
+    }
+
+    public void findAndPrintEmploeesWithSalaryLessThanInDepartment(double baseSalary) {
         System.out.printf("\n\nСписок сотрудников с ЗП меньше чем %s", baseSalary);
         for (int i = 0; i < emploeesSize(); i++) {
             if (emploees[i].getSalary() < baseSalary) {
@@ -96,14 +115,13 @@ public class Department {
         }
     }
 
-    public void findAndPrintEmploeesWithSalaryMoreThan(double baseSalary) {
-        System.out.printf("\n\nСписок сотрудников с ЗП больше или равной %s", baseSalary);
+    public Emploee findEmploeeInDepartmentByID(final int emploeeId) {
+        Emploee emploeeInDepartmentById = emploees[0];
         for (int i = 0; i < emploeesSize(); i++) {
-            if (emploees[i].getSalary() >= baseSalary) {
-                System.out.printf("\n%s", emploees[i].getEmploeeWithoutDepartment());
+            if (emploeeId == emploees[i].getId()) {
+                emploeeInDepartmentById = emploees[i];
             }
         }
+        return emploeeInDepartmentById;
     }
-
-
 }
