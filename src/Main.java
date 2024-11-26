@@ -106,7 +106,7 @@ public class Main {
                         "Ольга",
                         "Евгеньевна",
                         departmentN4.getDepartmentNumber(),
-                        200
+                        260
                 ),
                 departmentN4.getDepartmentNumber()
         );
@@ -132,53 +132,11 @@ public class Main {
         companyN1.indexSalaryAllEmploees(20);
         companyN1.printAllEmploee();
 
+        System.out.println("\n" + companyN1.findMaxSalaryInCompany());
+        System.out.println(Arrays.toString(companyN1.findAllEmploeeWithMaxSalaryInCompany()));
 
-
-
-
-//        System.out.printf("\nСумма затрат на ЗП в месяц: %s", calculateSumSalariesPerMonth());
-//
-//        System.out.printf("\nСредняя зарплата: %.2f", calculateAverageSalary());
-//
-//        System.out.printf("\nСотрудник с минимальной ЗП: %s", findEmploeeWithMinSalary());
-//
-//        System.out.printf("\nСотрудник с максимальной ЗП: %s", findEmploeeWithMaxSalary());
-//
-//        printFullNameEmploee();
-//        printAllEmploee();
-//        indexSalary(10);
-//        printAllEmploee();
-//
-//        int selectedDepartment = 5;
-//
-//        System.out.printf("\nСотрудник с максимальной ЗП в %s-м отделе: %s",
-//                selectedDepartment, findEmploeeWithMaxSalaryInDepartment(selectedDepartment));
-//        System.out.printf("\nСотрудник с минимальной ЗП в %s-м отделе: %s",
-//                selectedDepartment, findEmploeeWithMinSalaryInDepartment(selectedDepartment));
-//
-//        System.out.printf("\nСумма затрат на ЗП в %s-м отделе: %s",
-//                selectedDepartment, calculateSumSalariesPerMonthOfDepartment(selectedDepartment));
-//
-//        System.out.printf("\nВ %s-м отделе работающих сотрудников: %s",
-//                selectedDepartment, countDepartment(selectedDepartment));
-//        System.out.printf("\nСредняя зарплата в %s-м отделе: %.2f",
-//                selectedDepartment, calculateAverageSalaryOfDepartment(selectedDepartment));
-//
-//        indexSalaryEmploeeOfDepartment(20, selectedDepartment);
-//
-//        printAllEmploeesOfDepartment(selectedDepartment);
-//
-//        findAndPrintEmploeesWithSalaryLessThan(25000);
-//
-//        findAndPrintEmploeesWithSalaryMoreThan(50000);
+        System.out.println("\nСписок сотрудников с зарплатой меньше 250:");
+        companyN1.findAndPrintEmploeesWithSalaryLessThanInCompany(250);
 
     }
-
-    public static void checkDepartmentNumber(int departmentNumber) {
-        if (departmentNumber < 1 || departmentNumber > 5) {
-            throw new IllegalArgumentException("Такого департамента не существует");
-        }
-    }
-
-
 }

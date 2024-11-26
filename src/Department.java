@@ -20,11 +20,9 @@ public class Department {
     }
 
     public void removeEmployee(int id) {
-
         for (int i = 0; i < emploeesSizeInDepartment; i++) {
             if (emploees[i].getId() == id) {
                 System.arraycopy(emploees, i + 1, emploees, i, emploeesSizeInDepartment - i - 1);
-                //1 3 4 5 0 0 0 0 0 0
                 emploees[emploeesSizeInDepartment-- - 1] = null;
                 return;
             }
@@ -95,7 +93,6 @@ public class Department {
     }
 
     public void findAndPrintEmploeesWithSalaryLessThanInDepartment(double baseSalary) {
-        System.out.printf("\n\nСписок сотрудников с ЗП меньше чем %s", baseSalary);
         for (int i = 0; i < emploeesSizeInDepartment; i++) {
             if (emploees[i].getSalary() < baseSalary) {
                 System.out.printf("\n%s", emploees[i].getEmploeeWithoutDepartment());

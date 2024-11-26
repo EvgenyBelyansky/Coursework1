@@ -77,10 +77,32 @@ public class EmploeeBook {
         return minSalaryInCompany;
     }
 
+    public double findMaxSalaryInCompany() {
+        double tempSalary;
+        double maxSalaryInCompany = departments[0].findEmploeeWithMaxSalaryInDepartment().getSalary();
+        for (int i = 0; i < departmentSize(); i++) {
+            tempSalary = departments[i].findEmploeeWithMaxSalaryInDepartment().getSalary();
+            if (maxSalaryInCompany < tempSalary) {
+                maxSalaryInCompany = tempSalary;
+            }
+        }
+        return maxSalaryInCompany;
+    }
+
     public int countMinSalaryInCompany() {
         int count = 0;
         for (int i = 0; i < departmentSize(); i++) {
             if (departments[i].findEmploeeWithMinSalaryInDepartment().getSalary() == findMinSalaryInCompany()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int countMaxSalaryInCompany() {
+        int count = 0;
+        for (int i = 0; i < departmentSize(); i++) {
+            if (departments[i].findEmploeeWithMaxSalaryInDepartment().getSalary() == findMaxSalaryInCompany()) {
                 count++;
             }
         }
@@ -99,7 +121,17 @@ public class EmploeeBook {
         return minSalaryEmploeesInCompany;
     }
 
-//    Имеет ли смысл делать такой же набор методов для максимальной ЗП или нужно сделать по другому?
+    public Emploee[] findAllEmploeeWithMaxSalaryInCompany() {
+        Emploee[] maxSalaryEmploeesInCompany = new Emploee[countMaxSalaryInCompany()];
+        int j = 0;
+        for (int i = 0; i < departmentSize(); i++) {
+            if (departments[i].findEmploeeWithMaxSalaryInDepartment().getSalary() == findMaxSalaryInCompany()) {
+                maxSalaryEmploeesInCompany[j] = departments[i].findEmploeeWithMaxSalaryInDepartment();
+                j++;
+            }
+        }
+        return maxSalaryEmploeesInCompany;
+    }
 
     public void indexSalaryAllEmploees(final double percent) {
         for (int i = 0; i < departmentSize(); i++) {
@@ -116,5 +148,11 @@ public class EmploeeBook {
 
         }
         return emploeebyId;
+    }
+
+    public void findAndPrintEmploeesWithSalaryLessThanInCompany(double baseSalary) {
+        for (int i = 0; i < departmentSize(); i++) {
+            departments[i].findAndPrintEmploeesWithSalaryLessThanInDepartment(baseSalary);
+        }
     }
 }
