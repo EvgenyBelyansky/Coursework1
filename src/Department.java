@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Department {
 
 
@@ -37,17 +35,6 @@ public class Department {
         return departmentNumber;
     }
 
-//    public int emploeesSizeInDepartment {
-//        int amount = 0;
-//
-//        for (int i = 0; i < emploees.length; i++) {
-//            if (emploees[i] != null) {
-//                amount++;
-//            }
-//        }
-//        return amount;
-//    }
-
     public Emploee findEmploeeWithMaxSalaryInDepartment() {
         Emploee maxSalaryEmploee = emploees[0];
 
@@ -70,16 +57,6 @@ public class Department {
         return minSalaryEmploee;
     }
 
-    public Emploee[] getEmploees() {
-        return Arrays.copyOf(emploees,emploees.length);
-    }
-
-    public Emploee findEmploeeWithMinSalaryInDepartmentV2() {
-        Emploee[] emploees1 = getEmploees();
-        Arrays.sort(emploees1, new EmploeeSalaryComparator());
-        return emploees1[0];
-    }
-
     public double calculateSumSalariesPerMonthOfDepartment() {
         double sumSalaryOfDepartment = 0;
         for (int i = 0; i < emploeesSizeInDepartment; i++) {
@@ -87,15 +64,6 @@ public class Department {
         }
         return sumSalaryOfDepartment;
     }
-
-//    public int countDepartment() {
-//        int quantityEmploeeINDepartment = 0;
-//        for (int i = 0; i < emploeesSizeInDepartment; i++) {
-//            quantityEmploeeINDepartment++;
-//        }
-//        return quantityEmploeeINDepartment;
-//    }
-
 
     public int getEmploeesSizeInDepartment() {
         return emploeesSizeInDepartment;

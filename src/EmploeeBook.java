@@ -99,14 +99,6 @@ public class EmploeeBook {
         return minSalaryEmploeesInCompany;
     }
 
-    public Emploee[] findAllEmploeeWithMinSalaryInCompanyV2() {
-        Emploee[] minSalaryEmploeesInCompany = new Emploee[departmentSize()];
-        for (int i = 0; i < departmentSize(); i++) {
-
-        }
-        return null;
-    }
-
 //    Имеет ли смысл делать такой же набор методов для максимальной ЗП или нужно сделать по другому?
 
     public void indexSalaryAllEmploees(final double percent) {
