@@ -15,7 +15,7 @@ public class EmploeeBook {
 
     public void addDepartment(Department department) {
         if (departmentSize() >= departments.length) {
-            throw new OrganizationIsFullException();
+            throw new CompanyFullException();
         }
         departments[departmentSize()] = department;
     }
@@ -55,7 +55,7 @@ public class EmploeeBook {
     public int calculateQuantityEmploeeINCompany() {
         int quantityEmploeeINCompany = 0;
         for (int i = 0; i < departmentSize(); i++) {
-            quantityEmploeeINCompany += departments[i].countDepartment();
+            quantityEmploeeINCompany += departments[i].getEmploeesSizeInDepartment();
         }
         return quantityEmploeeINCompany;
     }
@@ -66,10 +66,12 @@ public class EmploeeBook {
 
 
     public double findMinSalaryInCompany() {
+        double tempSalary;
         double minSalaryInCompany = departments[0].findEmploeeWithMinSalaryInDepartment().getSalary();
         for (int i = 0; i < departmentSize(); i++) {
-            if (minSalaryInCompany > departments[i].findEmploeeWithMinSalaryInDepartment().getSalary()) {
-                minSalaryInCompany = departments[i].findEmploeeWithMinSalaryInDepartment().getSalary();
+            tempSalary = departments[i].findEmploeeWithMinSalaryInDepartment().getSalary();
+            if (minSalaryInCompany > tempSalary) {
+                minSalaryInCompany = tempSalary;
             }
         }
         return minSalaryInCompany;
@@ -95,6 +97,14 @@ public class EmploeeBook {
             }
         }
         return minSalaryEmploeesInCompany;
+    }
+
+    public Emploee[] findAllEmploeeWithMinSalaryInCompanyV2() {
+        Emploee[] minSalaryEmploeesInCompany = new Emploee[departmentSize()];
+        for (int i = 0; i < departmentSize(); i++) {
+
+        }
+        return null;
     }
 
 //    Имеет ли смысл делать такой же набор методов для максимальной ЗП или нужно сделать по другому?

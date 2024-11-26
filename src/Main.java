@@ -1,18 +1,19 @@
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        EmploeeBook company1 = new EmploeeBook();
+        EmploeeBook companyN1 = new EmploeeBook();
         Department departmentN1;
         Department departmentN2;
         Department departmentN3;
         Department departmentN4;
         Department departmentN5;
 
-        company1.addDepartment(departmentN1 = new Department(2, 1));
-        company1.addEmploee(
+        companyN1.addDepartment(departmentN1 = new Department(2, 1));
+        companyN1.addEmploee(
                 new Emploee(
                         "Сидоров",
                         "Петр",
@@ -23,7 +24,7 @@ public class Main {
                 departmentN1.getDepartmentNumber()
         );
 
-        company1.addEmploee(
+        companyN1.addEmploee(
                 new Emploee(
                         "Краюшина",
                         "Елена",
@@ -34,8 +35,8 @@ public class Main {
                 departmentN1.getDepartmentNumber()
         );
 
-        company1.addDepartment(departmentN2 = new Department(5, 2));
-        company1.addEmploee(
+        companyN1.addDepartment(departmentN2 = new Department(5, 2));
+        companyN1.addEmploee(
                 new Emploee(
                         "Мухин",
                         "Илья",
@@ -45,7 +46,7 @@ public class Main {
                 ),
                 departmentN2.getDepartmentNumber()
         );
-        company1.addEmploee(
+        companyN1.addEmploee(
                 new Emploee(
                         "Петров",
                         "Константин",
@@ -55,7 +56,7 @@ public class Main {
                 ),
                 departmentN2.getDepartmentNumber()
         );
-        company1.addEmploee(
+        companyN1.addEmploee(
                 new Emploee(
                         "Иванов",
                         "Иван",
@@ -66,8 +67,8 @@ public class Main {
                 departmentN2.getDepartmentNumber()
         );
 
-        company1.addDepartment(departmentN3 = new Department(5, 3));
-        company1.addEmploee(
+        companyN1.addDepartment(departmentN3 = new Department(5, 3));
+        companyN1.addEmploee(
                 new Emploee(
                         "Краюшина",
                         "Елена",
@@ -77,7 +78,7 @@ public class Main {
                 ),
                 departmentN3.getDepartmentNumber()
         );
-        company1.addEmploee(
+        companyN1.addEmploee(
                 new Emploee(
                         "Горбунов",
                         "Илья",
@@ -88,8 +89,8 @@ public class Main {
                 departmentN3.getDepartmentNumber()
         );
 
-        company1.addDepartment(departmentN4 = new Department(3, 4));
-        company1.addEmploee(
+        companyN1.addDepartment(departmentN4 = new Department(3, 4));
+        companyN1.addEmploee(
                 new Emploee(
                         "Арапов",
                         "Владимир",
@@ -99,7 +100,7 @@ public class Main {
                 ),
                 departmentN4.getDepartmentNumber()
         );
-        company1.addEmploee(
+        companyN1.addEmploee(
                 new Emploee(
                         "Федорова",
                         "Ольга",
@@ -110,8 +111,8 @@ public class Main {
                 departmentN4.getDepartmentNumber()
         );
 
-        company1.addDepartment(departmentN5 = new Department(10, 5));
-        company1.addEmploee(
+        companyN1.addDepartment(departmentN5 = new Department(10, 5));
+        companyN1.addEmploee(
                 new Emploee(
                         "Федоров",
                         "Кирилл",
@@ -122,12 +123,16 @@ public class Main {
                 departmentN5.getDepartmentNumber()
         );
 
-        company1.printAllEmploee();
-        company1.printFullNameEmploeeInCompany();
-        System.out.println(company1.calculateSumSalariesPerMonthInCompany());
-        System.out.println(company1.calculateAverageSalaryInCompany());
-        System.out.println(Arrays.toString(company1.findAllEmploeeWithMinSalaryInCompany()));
-        System.out.println(company1.findEmploeeInCompanyById(3));
+        companyN1.printAllEmploee();
+        companyN1.printFullNameEmploeeInCompany();
+        System.out.println(companyN1.calculateSumSalariesPerMonthInCompany());
+        System.out.println(companyN1.calculateAverageSalaryInCompany());
+        System.out.println(Arrays.toString(companyN1.findAllEmploeeWithMinSalaryInCompany()));
+        System.out.println(companyN1.findEmploeeInCompanyById(3));
+        companyN1.indexSalaryAllEmploees(20);
+        companyN1.printAllEmploee();
+
+
 
 
 
